@@ -17,11 +17,17 @@ Node* createNode(void* data);
 void destroyNode(Node* node);
 
 LinkedList* createLinkedList(Node* tail);
+LinkedList* createLinkedListVal(void* val);
 void destroyLinkedList(LinkedList* list);
-void addAll(LinkedList* list, Node* head);
+void linkedListAdd(LinkedList* list, void* value);
+void addAll(LinkedList* list, Node* tail);
 void addAtIndex(LinkedList * list, Node* node, int index);
+void addAtTail(LinkedList* list, Node* node);
+void addValueAtTail(LinkedList* list, void* node);
+void addValueAtIndex(LinkedList * list, void* val, int index);
 void removeLinkedList(LinkedList* list, int index);
 void* linkedListGet(LinkedList* list, int index);
+Node* linkedListGetAsNode(LinkedList* list, int index);
 void** getAsArray(LinkedList* list);
 
 

@@ -34,6 +34,5 @@ clean_run:
 	rm $(EXECUTABLE).exe
 
 clean_build:
-	rm ./includes/*.gch
 	rm ./build/*
 	rmdir ./build
