@@ -1,7 +1,6 @@
 #include "../includes/linkedlist.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include "linkedlist.h"
 
 Node* createNode(void* data)
 {
@@ -10,7 +9,9 @@ Node* createNode(void* data)
     node->next = NULL;
 }
 
-void destroyNode(Node* node){free(node);}
+void destroyNode(Node* node){
+    free(node);
+}
 
 LinkedList* createLinkedList(Node* tail)
 {
@@ -70,29 +71,79 @@ void addAll(LinkedList* list, Node* tail)
     list->len+= addLen;
 }
 
-void addAtIndex(LinkedList *list, Node *node, int index)
-{
-    //TODO Emotional Self Harm
-}
-
 void addAtTail(LinkedList *list, Node *node)
 {
-    //TODO Kill Myself metaforically
+    int addLen = 1;
+    Node** temp = &node;
+    while ((*temp)->next != NULL)
+    {
+        addLen++;
+        temp = &((*temp)->next);
+    }
+    (*temp)->next = list->tail;
+    list->tail = node;
+    list->len = addLen + list->len;
 }
 
-void addValueAtTail(LinkedList *list, void *node)
+void addValueAtTail(LinkedList *list, void *val)
 {
-    //TODO BALLS AND SHIT
+    Node *temp = createNode(val);
+    temp->next = list->tail;
+    list->tail = temp;
+    list->len++;
 }
 
 void addValueAtIndex(LinkedList *list, void *val, int index)
-{
-    //TODO I AM GOING INSANE
+{   	
+    if(index == 0){
+        addValueAtTail(list, val);
+        return;
+    }
+    Node **node = linkedListGetAsNode(list, index-1);
+    Node *add = createNode(val);
+    add->next = (*node)->next;
+    (*node)->next = add;
+    list->len++;    
+}
+
+void addAtIndex(LinkedList *list, Node *node, int index)
+{   
+    if(index == 0){
+        addAtTail(list, node);
+        return;
+    }
+    int addLen = 1;
+    Node** nodeAtIndex = linkedListGetAsNode(list, index-1);
+    Node** temp = &node;
+    while((*temp)->next != NULL){
+        addLen++;
+        temp = &((*temp)->next);
+    }
+    (*temp)->next = (*nodeAtIndex)->next;
+    (*nodeAtIndex)->next = node;
+    list->len += addLen;
 }
 
 void removeLinkedList(LinkedList *list, int index)
 {
-    //TODO follow @well_thatssad on twitter :3
+    if(index == list->len-1){
+        popLinkedList(list);
+        return;
+    }
+    Node** previous = linkedListGetAsNode(list, index-1);
+    Node* node = (*previous)->next;
+    (*previous)->next = node->next;
+    destroyNode(node);
+    list->len--;   
+}
+
+void popLinkedList(LinkedList *list)
+{
+    destroyNode(list->head);
+    list->len--;
+    Node** prev = linkedListGetAsNode(list, list->len-1);
+    list->head = *prev;
+    list->head->next = NULL;
 }
 
 void *linkedListGet(LinkedList *list, int index)
@@ -115,8 +166,11 @@ void *linkedListGet(LinkedList *list, int index)
     return temp->data;
 }
 
-Node* linkedListGetAsNode(LinkedList* list, int index)
+Node** linkedListGetAsNode(LinkedList* list, int index)
 {
+    if(index == 0){
+        return &(list->tail);
+    }
     if(index >= list->len){
         fprintf(stderr,"List index out of bounds: %d\n", index);
         destroyLinkedList(list);
@@ -130,30 +184,31 @@ Node* linkedListGetAsNode(LinkedList* list, int index)
             exit(-1);
         }
     }
-    return *temp;
+    return temp;
 }
 
 void** getAsArray(LinkedList* list)
 {
-    void** arr = (void**) malloc(sizeof(void*) * list->len);
-
+    void** arr = (void**) malloc(sizeof(void*) * list->len); 
+    
     if(list->len == 1)
     {
         arr[0] = list->tail->data;
         return arr;
     }
-
+    
     int index = 0;
     Node* temp = list->tail;
-
+    
     while(temp->next != NULL)
     {
         arr[index] = temp->data;
         temp = temp->next;
         index++;
     }
-
+    
     arr[index] = temp->data;
+    
     return arr;
 }
 

@@ -23,11 +23,12 @@ void linkedListAdd(LinkedList* list, void* value);
 void addAll(LinkedList* list, Node* tail);
 void addAtIndex(LinkedList * list, Node* node, int index);
 void addAtTail(LinkedList* list, Node* node);
-void addValueAtTail(LinkedList* list, void* node);
+void addValueAtTail(LinkedList* list, void* val);
 void addValueAtIndex(LinkedList * list, void* val, int index);
 void removeLinkedList(LinkedList* list, int index);
+void popLinkedList(LinkedList* list);
 void* linkedListGet(LinkedList* list, int index);
-Node* linkedListGetAsNode(LinkedList* list, int index);
+Node** linkedListGetAsNode(LinkedList* list, int index);
 void** getAsArray(LinkedList* list);
 
 
