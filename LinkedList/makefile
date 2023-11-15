@@ -2,6 +2,7 @@ CXX := gcc
 CFLAGS := -g
 INCLUDES := ./includes/*.h
 EXECUTABLE := untitled
+OBJDIR := ./obj
 
 OBJ := *.o
 
@@ -23,14 +24,15 @@ exec:
 
 obj:
 	$(CXX) $(INCLUDES) $(CFLAGS) -c ./src/*.c 
+	mkdir $(OBJDIR)	
+	mv *.o $(OBJDIR)
 
 clean_obj:
 	rm ./includes/*.gch
-	rm *.o
+	rm $(OBJDIR)/*.o
 
 clean_run:
-	rm ./includes/*.gch
-	rm *.o
+	clean_obj
 	rm $(EXECUTABLE).exe
 
 clean_build:

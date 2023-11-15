@@ -1,7 +1,7 @@
 CXX := gcc
 CFLAGS := -g
 INCLUDES := ./includes/*.h
-EXECUTABLE := untitled
+EXECUTABLE := cpu
 
 OBJ := *.o
 
@@ -15,7 +15,7 @@ build:
 run:
 	make obj
 	make exec
-	./untitled
+	./cpu.exe
 	make clean_run
 
 exec:
