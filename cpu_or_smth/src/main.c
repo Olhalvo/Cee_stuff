@@ -4,5 +4,6 @@
 
 int main(){
     Cpu_t* cpu = initCpu("main.bc");
+    destroyCpu(cpu);
     return EXIT_SUCCESS;
 }
