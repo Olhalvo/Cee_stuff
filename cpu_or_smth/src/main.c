@@ -3,6 +3,6 @@
 #include <stdint.h>
 
 int main(){
-    Cpu_t* cpu = initCpu("Sexo");
+    Cpu_t* cpu = initCpu("main.bc");
     return EXIT_SUCCESS;
 }
