@@ -32,7 +32,7 @@ clean_obj:
 	rm $(OBJDIR)/*.o
 
 clean_run:
-	clean_obj
+	make clean_obj
 	rm $(EXECUTABLE).exe
 
 clean_build:
