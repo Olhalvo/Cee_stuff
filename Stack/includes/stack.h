@@ -15,12 +15,12 @@ StackNode* createStackNode(void* val);
 void destroyStackNode(StackNode* node, bool recursiveDestroy);
 
 typedef struct _Stack {
-    int lenght;
+    int length;
     StackNode* head;
 } Stack;
 
 /**
- * @brief Creates stack and automatically calculates lenght from a given stack node
+ * @brief Creates stack and automatically calculates length from a given stack node
  * @author Olhalvo
  * @date 19/09/2024
  * @param StackNode* head Head of the given stack, IE. the first one to be popped when stackPop() is called on the given stack
